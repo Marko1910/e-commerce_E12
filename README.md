@@ -242,10 +242,12 @@ El archivo [`render.yaml`](./render.yaml) es un **Blueprint** que crea los tres 
 
 ## 🌐 URLs del proyecto en línea
 
-| Servicio  | URL                                          |
-| --------- | -------------------------------------------- |
-| Frontend  | _(completar tras el deploy)_                 |
-| Backend   | _(completar tras el deploy)_                 |
+| Servicio  | URL                                                |
+| --------- | -------------------------------------------------- |
+| Frontend  | https://ecommerce-frontend-6f7t.onrender.com       |
+| Backend   | https://ecommerce-backend-cjrt.onrender.com        |
+
+> El backend expone los endpoints bajo `/api` (ej. <https://ecommerce-backend-cjrt.onrender.com/api/products>).
 
 ---
 
