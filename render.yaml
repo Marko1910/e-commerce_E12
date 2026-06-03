@@ -1,0 +1,43 @@
+# Render Blueprint - despliega BD + backend + frontend de una sola vez.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# IMPORTANTE: NEXT_PUBLIC_API_URL se hornea en el build del frontend.
+# Tras el primer deploy, copia la URL real del backend y actualiza esa variable.
+
+databases:
+  - name: ecommerce-db
+    databaseName: ecommerce
+    plan: free
+
+services:
+  # --- Backend: API Express ---
+  - type: web
+    name: ecommerce-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install && npm run migrate
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecommerce-db
+          property: connectionString
+      - key: NODE_VERSION
+        value: "20"
+
+  # --- Frontend: Next.js ---
+  - type: web
+    name: ecommerce-frontend
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # Reemplaza por la URL real del backend tras el primer deploy.
+      - key: NEXT_PUBLIC_API_URL
+        value: https://ecommerce-backend.onrender.com
